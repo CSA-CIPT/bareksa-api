@@ -1,0 +1,171 @@
+server:
+  port: 8780
+
+spring:
+  oracle-frontoffice:
+    datasource:
+      url: jdbc:oracle:thin:@10.10.1.117:1521:ONLTCIPTA
+      username: CORE
+      password: trading123
+      driverClassName: oracle.jdbc.OracleDriver
+      hikari:
+        maximum-pool-size: 5
+        minimum-idle: 1
+        idle-timeout: 10000
+        pool-name: ORACLE_FO_HIKARI_CP
+        max-lifetime: 60000
+        connection-timeout: 30000
+        leak-detection-threshold: 25000
+        connection-test-query: select 1 from dual
+    jpa:
+      show-sql: false
+      open-in-view: false
+      hibernate:
+        ddl-auto: none
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  oracle-dba:
+    datasource:
+      url: jdbc:oracle:thin:@10.10.1.173:1521:DEVDBA
+      username: denpasar
+      password: password
+      driverClassName: oracle.jdbc.OracleDriver
+      hikari:
+        maximum-pool-size: 5
+        minimum-idle: 2
+        idle-timeout: 10000
+        pool-name: ORACLE_BO_HIKARI_CP
+        max-lifetime: 60000
+        connection-timeout: 30000
+        leak-detection-threshold: 15000
+        connection-test-query: select 1 from dual
+    jpa:
+      show-sql: false
+      open-in-view: false
+      hibernate:
+        ddl-auto: none
+        format-sql: true
+        batch-size: 5000
+
+  oracle-backoffice:
+    datasource:
+      url: jdbc:oracle:thin:@10.10.1.53:1521:sanur
+      username: denpasar
+      password: password
+      driverClassName: oracle.jdbc.OracleDriver
+      hikari:
+        maximum-pool-size: 5
+        minimum-idle: 1
+        idle-timeout: 10000
+        pool-name: ORACLE_BO_HIKARI_CP
+        max-lifetime: 60000
+        connection-timeout: 30000
+        leak-detection-threshold: 25000
+        connection-test-query: select 1 from dual
+    jpa:
+      show-sql: true
+      open-in-view: false
+      hibernate:
+        ddl-auto: none
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  mysql-payment:
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:mysql://10.10.1.108:3306/payment?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8
+      username: root
+      password: dbpassword123
+      driverClassName: com.mysql.jdbc.Driver
+      hikari:
+        maximum-pool-size: 3
+        minimum-idle: 1
+        idle-timeout: 10000
+        pool-name: MySQL_PAYMENT
+        max-lifetime: 90000
+        connection-timeout: 120000
+        leak-detection-threshold: 25000
+
+    jpa:
+      show-sql: true
+      open-in-view: false
+      hibernate:
+        ddl-auto: none
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  mysql-security:
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:mysql://192.168.150.70:3306/ciptadana-securities_production?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8
+      username: citra
+      password: citra123
+      driverClassName: com.mysql.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        minimum-idle: 1
+        idle-timeout: 10000
+        pool-name: MySQL_SECURITY
+        max-lifetime: 90000
+        connection-timeout: 120000
+        leak-detection-threshold: 25000
+
+    jpa:
+      show-sql: true
+      open-in-view: false
+      hibernate:
+        ddl-auto: none
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  postgres-bareksa:
+    datasource:
+      url: jdbc:postgresql://192.168.150.138:5432/bareksa?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+      username: ciptadana
+      password: ciptadana
+      driver-class-name: org.postgresql.Driver
+      hikari:
+        maximumPoolSize: 5
+        minimumIdle: 1
+        connectionTimeout: 30000
+        poolName: cari-hikari-postgres-cp
+        maxLifetime: 1100000
+        idleTimeout: 300000 # Set the maximum idle time for a connection (in milliseconds)
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+          prepStmtCacheSqlLimit: 2048
+          useServerPrepStmts: true
+          useLocalSessionState: true
+          rewriteBatchedStatements: true
+          cacheResultSetMetadata: true
+          cacheServerConfiguration: true
+          elideSetAutoCommits: true
+          maintainTimeStats: false
+    jpa:
+      hibernate:
+        ddl-auto: none
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+        format_sql: true
+        default_batch_fetch_size: 100
+      open-in-view: false
+      show-sql: true
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+data-sync:
+  migrate: true
