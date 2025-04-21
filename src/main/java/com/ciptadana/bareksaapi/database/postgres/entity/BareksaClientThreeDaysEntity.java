@@ -27,11 +27,6 @@ public class BareksaClientThreeDaysEntity implements Persistable<BareksaClientTh
     @Column(name = "name")
     private String name;
 
-    @Column(name = "due_date")
-    private String dueDate;
-
-
-
     @Transient
     private boolean isNew;
     @Override

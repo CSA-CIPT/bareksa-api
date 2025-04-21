@@ -71,15 +71,73 @@ public class DataMigrateService {
     }
 
     private void syncAll(){
-        syncClientListMppe();
-        syncClientCommission();
-        syncClientCharge();
-        syncClientRdn();
-        syncClientPortfolio();
-        syncClientFinancing();
-        syncClientThreeDays();
-        syncRdiBalanceHistorical();
-        syncAveragePrice();
+        try{
+            syncClientListMppe();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        try{
+            syncClientCommission();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        try{
+            syncClientCharge();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+
+        try{
+            syncClientRdn();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        try{
+            syncClientPortfolio();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        try{
+            syncClientFinancing();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+
+        try{
+            syncClientThreeDays();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+
+        try{
+            syncRdiBalanceHistorical();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        try{
+            syncAveragePrice();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+
 //        CompletableFuture<Void> syncClientList = asyncUtil.runAsync(this::, Executors.newVirtualThreadPerTaskExecutor());
 //        CompletableFuture<Void> syncClientCommission = asyncUtil.runAsync(this::syncClientCommission, Executors.newVirtualThreadPerTaskExecutor());
 //        CompletableFuture<Void> syncClientCharge = asyncUtil.runAsync(this::syncClientCharge, Executors.newVirtualThreadPerTaskExecutor());
@@ -338,13 +396,13 @@ public class DataMigrateService {
             transDueDate = "1";
         }
         bareksaClientThreeDaysKey.setTransDueDate(transDueDate);
+        bareksaClientThreeDaysKey.setDueDate(dueDate.toString());
 
         BareksaClientThreeDaysEntity entity = BareksaClientThreeDaysEntity.builder()
                 .id(bareksaClientThreeDaysKey)
                 .name(client.getName())
                 .amount(client.getAmount())
                 .amountIdr(client.getAmountIdr())
-                .dueDate(dueDate.toString())
                 .isNew(true)
                 .build();
 

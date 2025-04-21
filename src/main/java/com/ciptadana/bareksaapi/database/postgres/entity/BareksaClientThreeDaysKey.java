@@ -19,4 +19,7 @@ public class BareksaClientThreeDaysKey implements Serializable {
 
     @Column(name = "trans_due_date")
     private String transDueDate;
+
+    @Column(name = "due_date")
+    private String dueDate;
 }
